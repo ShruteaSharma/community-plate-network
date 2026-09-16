@@ -1,6 +1,6 @@
 # Community Food Connect
 
-make a full stack project that is Built Community Food Connect, a full-stack food donation platform connecting donors, NGOs, and volunteers, with secure authentication, role-based access control, geolocation-based donation discovery, real-time status tracking, image uploads, and analytics dashboards
+Made a full stack project that is Built Community Food Connect, a full-stack food donation platform connecting donors, NGOs, and volunteers, with secure authentication, role-based access control, geolocation-based donation discovery, real-time status tracking, image uploads, and analytics dashboards
 
 This project was built with [Lovable](https://lovable.dev).
 
