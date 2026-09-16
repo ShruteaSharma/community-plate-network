@@ -72,9 +72,11 @@ function DonationDetail() {
   const advance = useMutation({
     mutationFn: async (next: DonationStatus) => {
       const stamp = new Date().toISOString();
-      const patch: Record<string, unknown> = { status: next };
-      if (next === "picked_up") patch.picked_up_at = stamp;
-      if (next === "delivered") patch.delivered_at = stamp;
+      const patch = {
+        status: next,
+        ...(next === "picked_up" ? { picked_up_at: stamp } : {}),
+        ...(next === "delivered" ? { delivered_at: stamp } : {}),
+      };
       const { error } = await supabase.from("donations").update(patch).eq("id", donationId);
       if (error) throw error;
     },
