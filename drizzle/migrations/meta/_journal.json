@@ -1,5 +1,13 @@
 {
   "version": "7",
   "dialect": "postgresql",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1789563459943,
+      "tag": "0000_community_food_connect_core",
+      "breakpoints": true
+    }
+  ]
 }
