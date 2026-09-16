@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedDiscoverRouteImport } from './routes/_authenticated/discover'
+import { Route as AuthenticatedImpactRouteImport } from './routes/_authenticated/impact'
 import { Route as AuthenticatedPostRouteImport } from './routes/_authenticated/post'
+import { Route as AuthenticatedDonationsDonationIdRouteImport } from './routes/_authenticated/donations.$donationId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -29,9 +32,19 @@ const AuthRoute = AuthRouteImport.update({
   path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedDiscoverRoute = AuthenticatedDiscoverRouteImport.update({
   id: '/discover',
   path: '/discover',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedImpactRoute = AuthenticatedImpactRouteImport.update({
+  id: '/impact',
+  path: '/impact',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPostRoute = AuthenticatedPostRouteImport.update({
@@ -39,39 +52,71 @@ const AuthenticatedPostRoute = AuthenticatedPostRouteImport.update({
   path: '/post',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedDonationsDonationIdRoute =
+  AuthenticatedDonationsDonationIdRouteImport.update({
+    id: '/donations/$donationId',
+    path: '/donations/$donationId',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/discover': typeof AuthenticatedDiscoverRoute
+  '/impact': typeof AuthenticatedImpactRoute
   '/post': typeof AuthenticatedPostRoute
+  '/donations/$donationId': typeof AuthenticatedDonationsDonationIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
   '/discover': typeof AuthenticatedDiscoverRoute
+  '/impact': typeof AuthenticatedImpactRoute
   '/post': typeof AuthenticatedPostRoute
+  '/donations/$donationId': typeof AuthenticatedDonationsDonationIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
   '/_authenticated/discover': typeof AuthenticatedDiscoverRoute
+  '/_authenticated/impact': typeof AuthenticatedImpactRoute
   '/_authenticated/post': typeof AuthenticatedPostRoute
+  '/_authenticated/donations/$donationId': typeof AuthenticatedDonationsDonationIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/discover' | '/post'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/discover'
+    | '/impact'
+    | '/post'
+    | '/donations/$donationId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/discover' | '/post'
+  to:
+    | '/'
+    | '/auth'
+    | '/dashboard'
+    | '/discover'
+    | '/impact'
+    | '/post'
+    | '/donations/$donationId'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/_authenticated/dashboard'
     | '/_authenticated/discover'
+    | '/_authenticated/impact'
     | '/_authenticated/post'
+    | '/_authenticated/donations/$donationId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -103,11 +148,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/discover': {
       id: '/_authenticated/discover'
       path: '/discover'
       fullPath: '/discover'
       preLoaderRoute: typeof AuthenticatedDiscoverRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/impact': {
+      id: '/_authenticated/impact'
+      path: '/impact'
+      fullPath: '/impact'
+      preLoaderRoute: typeof AuthenticatedImpactRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/post': {
@@ -117,17 +176,30 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPostRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/donations/$donationId': {
+      id: '/_authenticated/donations/$donationId'
+      path: '/donations/$donationId'
+      fullPath: '/donations/$donationId'
+      preLoaderRoute: typeof AuthenticatedDonationsDonationIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
   AuthenticatedDiscoverRoute: typeof AuthenticatedDiscoverRoute
+  AuthenticatedImpactRoute: typeof AuthenticatedImpactRoute
   AuthenticatedPostRoute: typeof AuthenticatedPostRoute
+  AuthenticatedDonationsDonationIdRoute: typeof AuthenticatedDonationsDonationIdRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
   AuthenticatedDiscoverRoute: AuthenticatedDiscoverRoute,
+  AuthenticatedImpactRoute: AuthenticatedImpactRoute,
   AuthenticatedPostRoute: AuthenticatedPostRoute,
+  AuthenticatedDonationsDonationIdRoute: AuthenticatedDonationsDonationIdRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
